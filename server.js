@@ -9,19 +9,17 @@ const PORT = process.env.PORT || 8000;
 // Initialize notesData
 
 
-app.use(express.json());
 app.use(express.urlencoded({extended: true}));
-app.use(express.static(path.join(__dirname, "./public"))) // STUCK HERE
+app.use(express.json());
+app.use(express.static(path.join(__dirname, "./public")))
 
+var api = require("./routes/apiRoutes");
+var html = require("./routes/htmlRoutes");
+app.use(api);
+app.use(html);
 
-app.get("/api/notes", function(err, res) {
-    try {
-        notesData = fs.readFileSync("db/db.json", "utf8");
-        console.log("Success");
-        notesData = JSON.parse(notesData);
-    } catch (err) {
-        console.log("\n error (in app.get.catch):");
-        console.log(err);
-    }
-    res.json(notesData);
-});
+// Make server listen
+app.listen(PORT, function(){
+    console.log("App listening on PORT");
+    
+})

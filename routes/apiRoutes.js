@@ -18,3 +18,17 @@ router.post("/api/notes", function(req, res){
     fs.writeFileSync(("../db/db.json", JSON.stringify(db)));
     res.json(db);
 });
+
+// router.get("/api/notes", function(err, res) {
+//     try {
+//         notesData = fs.readFileSync("db/db.json", "utf8");
+//         console.log("Success");
+//         notesData = JSON.parse(notesData);
+//     } catch (err) {
+//         console.log("\n error (in app.get.catch):");
+//         console.log(err);
+//     }
+//     res.json(notesData);
+// });
+
+module.exports = router;
