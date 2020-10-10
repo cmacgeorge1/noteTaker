@@ -4,7 +4,7 @@ const { json } = require("express");
 var fs = require("fs");
 
 router.get("/api/notes", function(req, res){
-    db = JSON.parse(fs.readFileSync("../db/db.json"));
+    db = JSON.parse(fs.readFileSync("./db/db.json"));
     res.json(db);
 });
 
@@ -15,8 +15,12 @@ router.post("/api/notes", function(req, res){
         text: req.body.text
     }
     db.push(newNote);
-    fs.writeFileSync(("../db/db.json", JSON.stringify(db)));
-    res.json(db);
+    console.log(db);
+    fs.writeFileSync("./db/db.json", JSON.stringify(db), function(err, data){
+        if (err) throw err;
+        console.log(data);
+        res.json(db);
+    });
 });
 
 // router.get("/api/notes", function(err, res) {
