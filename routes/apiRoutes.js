@@ -23,6 +23,24 @@ router.post("/api/notes", function(req, res){
     });
 });
 
+router.delete("/api/notes/:id", function(req, res){
+    var updatedNotes = [];
+    for (i = 0; i < db.length; i++) {
+        if (db[i].id != req.params.id) {
+            updatedNotes.push(db[i]);
+        }
+    }
+    db = updatedNotes;
+    console.log(db);
+    fs.writeFileSync("./db/db.json", JSON.stringify(db), function(err, data){
+        if (err) throw err;
+        console.log(data);
+        res.json(db);
+    });
+});
+
+
+
 // router.get("/api/notes", function(err, res) {
 //     try {
 //         notesData = fs.readFileSync("db/db.json", "utf8");
