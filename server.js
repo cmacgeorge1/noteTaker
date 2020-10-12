@@ -1,6 +1,5 @@
 // Express needs to interact with the front end
 const express = require("express");
-
 // Create an express server
 const app = express();
 // Set PORT(s)
